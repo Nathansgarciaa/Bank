@@ -1,4 +1,6 @@
 g++ -o BankProgram BankAccount.cpp SavingsAccount.cpp CheckingAccount.cpp Bank.cpp main.cpp
-./BankProgram
+
+
+to run: ./BankProgram
 
 

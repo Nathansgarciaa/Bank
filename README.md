@@ -1,2 +1,4 @@
-g++ main.cpp BankAccount.cpp SavingsAccount.cpp CheckingAccount.cpp -o bank
+g++ -o BankProgram BankAccount.cpp SavingsAccount.cpp CheckingAccount.cpp Bank.cpp main.cpp
+./BankProgram
+
 

@@ -1,10 +1,7 @@
 #include "SavingsAccount.h"
 
-SavingsAccount::SavingsAccount(std::string name, double balance, double rate) 
-    : BankAccount(name, balance), interestRate(rate) {
-}
+SavingsAccount::SavingsAccount(string name, double balance, double rate) : BankAccount(name, balance), interestRate(rate) {}
 
 void SavingsAccount::addInterest() {
-    double interest = accountBalance * (interestRate / 100);
-    deposit(interest);
+    accountBalance += accountBalance * interestRate / 100;
 }

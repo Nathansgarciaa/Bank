@@ -1,8 +1,6 @@
 #include "CheckingAccount.h"
 
-CheckingAccount::CheckingAccount(std::string name, double balance, double overdraftFee)
-    : BankAccount(name, balance), overdraftFee(overdraftFee) {
-}
+CheckingAccount::CheckingAccount(string name, double balance, double fee) : BankAccount(name, balance), overdraftFee(fee) {}
 
 void CheckingAccount::withdraw(double amount) {
     BankAccount::withdraw(amount);

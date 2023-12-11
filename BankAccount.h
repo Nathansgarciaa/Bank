@@ -2,21 +2,24 @@
 #define BANKACCOUNT_H
 
 #include <string>
+using namespace std;
 
 class BankAccount {
 protected:
+    static int nextAccountNumber;
     int accountNumber;
-    std::string accountHolderName;
+    string accountHolderName;
     double accountBalance;
 
 public:
     BankAccount();
-    BankAccount(std::string accountHolderName, double accountBalance);
+    BankAccount(string name, double balance);
     virtual ~BankAccount();
 
+    double getBalance();
+    void displayAccountInfo();
     virtual void deposit(double amount);
     virtual void withdraw(double amount);
-    void displayAccountInfo() const;
 };
 
 #endif // BANKACCOUNT_H

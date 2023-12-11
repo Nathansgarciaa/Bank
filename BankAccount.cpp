@@ -1,36 +1,26 @@
 #include "BankAccount.h"
 #include <iostream>
 
-using namespace std;
+int BankAccount::nextAccountNumber = 1;
 
-BankAccount::BankAccount() : accountNumber(0), accountHolderName("Unnamed"), accountBalance(0.0) {
-    static int nextAccountNumber = 1;
-    accountNumber = nextAccountNumber++;
+BankAccount::BankAccount() : accountNumber(nextAccountNumber++), accountHolderName("John Doe"), accountBalance(0.00) {}
+
+BankAccount::BankAccount(string name, double balance) : accountNumber(nextAccountNumber++), accountHolderName(name), accountBalance(balance) {}
+
+BankAccount::~BankAccount() {}
+
+double BankAccount::getBalance() {
+    return accountBalance;
 }
 
-BankAccount::BankAccount(string name, double balance) 
-    : accountHolderName(name), accountBalance(balance) {
-    static int nextAccountNumber = 1;
-    accountNumber = nextAccountNumber++;
-}
-
-BankAccount::~BankAccount() {
-    // Destructor logic (if needed)
+void BankAccount::displayAccountInfo() {
+    cout << "Account Number: " << accountNumber << "\nAccount Holder: " << accountHolderName << "\nAccount Balance: $" << accountBalance << endl;
 }
 
 void BankAccount::deposit(double amount) {
-    if (amount > 0) {
-        accountBalance += amount;
-    }
+    accountBalance += amount;
 }
 
 void BankAccount::withdraw(double amount) {
-    if (amount > 0 && amount <= accountBalance) {
-        accountBalance -= amount;
-    }
-}
-
-void BankAccount::displayAccountInfo() const {
-    cout << "Account Number: " << accountNumber << "\nAccount Holder: " << accountHolderName 
-         << "\nBalance: $" << accountBalance << endl;
+    accountBalance -= amount;
 }

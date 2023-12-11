@@ -8,7 +8,7 @@ private:
     double interestRate;
 
 public:
-    SavingsAccount(std::string accountHolderName, double accountBalance, double interestRate);
+    SavingsAccount(string name, double balance, double rate);
     void addInterest();
 };
 

@@ -8,8 +8,8 @@ private:
     double overdraftFee;
 
 public:
-    CheckingAccount(std::string accountHolderName, double accountBalance, double overdraftFee);
-    void CheckingAccount::withdraw(double amount) override;
+    CheckingAccount(string name, double balance, double fee);
+    void withdraw(double amount) override;
 };
 
 #endif // CHECKINGACCOUNT_H

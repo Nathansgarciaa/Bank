@@ -5,10 +5,13 @@
 
 class SavingsAccount : public BankAccount {
 private:
-    double interestRate;
+    double interestRate; // Interest rate for the savings account
 
 public:
-    SavingsAccount(string name, double balance, double rate);
+    // Constructor
+    SavingsAccount(string accountHolderName, double accountBalance, double interestRate);
+
+    // Function to add interest based on the interest rate
     void addInterest();
 };
 

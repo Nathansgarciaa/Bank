@@ -1,59 +1,59 @@
-#include "Bank.h"
+#include "BankAccount.h"
 #include <iostream>
 #include <string>
+#include "BankAccount.h"
+
+using namespace std;
 
 int main() {
-    Bank bank;
-    int choice;
+    string holderName;
+    double initialBalance;
+    int option;
+
+    cout << "Enter account holder's name: ";
+    getline(cin, holderName);
+    cout << "Enter initial account balance: ";
+    cin >> initialBalance;
+
+    BankAccount account(holderName, initialBalance); // Added a semicolon here
 
     do {
-        cout << "\nMenu:\n1. Add a new account\n2. Display all accounts\n3. Perform operations on accounts\n4. Exit\nEnter your choice: ";
-        cin >> choice;
+        cout << "\nMenu:\n"
+             << "1. Display account information\n"
+             << "2. Deposit funds\n"
+             << "3. Withdraw funds\n"
+             << "4. Exit\n"
+             << "Select an option: ";
+        cin >> option;
 
-        switch (choice) {
-            case 1: {
-                string name;
-                double balance;
-                int accountType;
-
-                cout << "Enter account holder's name: ";
-                cin.ignore();
-                getline(cin, name);
-
-                cout << "Enter initial account balance: ";
-                cin >> balance;
-
-                cout << "Account Type (1 for Savings, 2 for Checking): ";
-                cin >> accountType;
-
-                if (accountType == 1) {
-                    double interestRate;
-                    cout << "Enter interest rate: ";
-                    cin >> interestRate;
-                    bank.add_account(new SavingsAccount(name, balance, interestRate));
-                } else if (accountType == 2) {
-                    double fee;
-                    cout << "Enter overdraft fee: ";
-                    cin >> fee;
-                    bank.add_account(new CheckingAccount(name, balance, fee));
-                } else {
-                    cout << "Invalid account type." << endl;
-                }
-                break;
+        try {
+            if (option == 1) {
+                account.displayAccountInfo();
+            } else if (option == 2) {
+                double depositAmount;
+                cout << "Enter deposit amount: ";
+                cin >> depositAmount;
+                account.deposit(depositAmount);
+                cout << "Deposited successfully.\n";
+            } else if (option == 3) {
+                double withdrawalAmount;
+                cout << "Enter withdrawal amount: ";
+                cin >> withdrawalAmount;
+                account.withdraw(withdrawalAmount);
+                cout << "Withdrawn successfully.\n";
+            } else if (option == 4) {
+                cout << "Exiting.\n";
+            } else {
+                cout << "Invalid option. Please try again.\n";
             }
-            case 2:
-                bank.display_all_accounts();
-                break;
-            case 3:
-                bank.perform();
-                break;
-            case 4:
-                cout << "Exiting program." << endl;
-                break;
-            default:
-                cout << "Invalid choice. Please try again." << endl;
+        } catch (const invalid_argument &e) {
+            cerr << "Error: " << e.what() << endl;
         }
-    } while (choice != 4);
+
+        // Clear the input buffer to handle next input correctly
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    } while (option != 4);
 
     return 0;
 }

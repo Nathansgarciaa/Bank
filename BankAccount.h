@@ -5,21 +5,23 @@
 using namespace std;
 
 class BankAccount {
-protected:
-    static int nextAccountNumber;
-    int accountNumber;
-    string accountHolderName;
-    double accountBalance;
-
 public:
-    BankAccount();
-    BankAccount(string name, double balance);
-    virtual ~BankAccount();
+    // Member variables
+    int accountNumber;
+    std::string accountHolderName;
+    double accountBalance;
+    static int lastAccountNumber;
 
+    // Constructors
+    BankAccount();
+    BankAccount(int accountNumber, string accountHolderName, double accountBalance);
+    BankAccount(string accountHolderName, double accountBalance);
+
+    // Member functions
     double getBalance();
     void displayAccountInfo();
-    virtual void deposit(double amount);
-    virtual void withdraw(double amount);
+    void deposit(double amount);
+    void withdraw(double amount);
 };
 
 #endif // BANKACCOUNT_H

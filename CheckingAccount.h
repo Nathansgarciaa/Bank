@@ -5,11 +5,14 @@
 
 class CheckingAccount : public BankAccount {
 private:
-    double overdraftFee;
+    double overdraftFee; // Fee charged for overdraft
 
 public:
-    CheckingAccount(string name, double balance, double fee);
-    void withdraw(double amount) override;
+    // Constructor
+    CheckingAccount(string accountHolderName, double accountBalance, double overdraftFee);
+
+    // Overridden withdraw function
+    void withdraw(double amount);
 };
 
 #endif // CHECKINGACCOUNT_H

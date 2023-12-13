@@ -1,11 +1,11 @@
 #include "CheckingAccount.h"
 
 
-CheckingAccount::CheckingAccount(string accountHolderName, double accountBalance, double overdraftFee){
+CheckingAccount::CheckingAccount(string accountHolderName, double accountBalance){
     
     this-> accountHolderName = accountHolderName;
     this-> accountBalance = accountBalance;
-    this-> overdraftFee = overdraftFee;
+   
 }
 void CheckingAccount::withdraw(double amount) {
     BankAccount::withdraw(amount);

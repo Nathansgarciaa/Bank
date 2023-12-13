@@ -9,7 +9,7 @@ private:
 
 public:
     // Constructor
-    SavingsAccount(string accountHolderName, double accountBalance, double interestRate);
+    SavingsAccount(string accountHolderName, double accountBalance);
 
     // Function to add interest based on the interest rate
     void addInterest();

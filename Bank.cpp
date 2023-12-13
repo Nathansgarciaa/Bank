@@ -1,52 +1,72 @@
-#include "Bank.h"
 #include <iostream>
+#include <vector>
+#include "BankAccount.h"
+#include "SavingsAccount.h"
+#include "CheckingAccount.h"
 
-Bank::Bank() {}
+class Bank {
+    std::vector<BankAccount*> accounts;
 
-Bank::~Bank() {
-    for (auto& account : accounts) {
-        delete account;
-    }
-    accounts.clear();
-}
+public:
+    void add_account() {
+        std::string name;
+        double balance;
+        int type;
+        std::cout << "Enter account holder's name: ";
+        std::cin >> name;
+        std::cout << "Enter initial balance: ";
+        std::cin >> balance;
+        std::cout << "Account type (1 for Checking, 2 for Savings): ";
+        std::cin >> type;
 
-void Bank::add_account(BankAccount* account) {
-    accounts.push_back(account);
-}
-
-void Bank::display_all_accounts() {
-    for (auto& account : accounts) {
-        account->displayAccountInfo();
-    }
-}
-
-void Bank::perform() {
-    int accountNumber, choice;
-    double amount;
-
-    cout << "Enter account number: ";
-    cin >> accountNumber;
-
-    if (accountNumber < 0 || accountNumber >= accounts.size()) {
-        cout << "Invalid account number." << endl;
-        return;
+        if (type == 1) {
+            accounts.push_back(new CheckingAccount(name, balance));
+        } else {
+            accounts.push_back(new SavingsAccount(name, balance));
+        }
     }
 
-    cout << "1. Deposit\n2. Withdraw\nEnter choice: ";
-    cin >> choice;
-
-    switch (choice) {
-        case 1:
-            cout << "Enter amount to deposit: ";
-            cin >> amount;
-            accounts[accountNumber]->deposit(amount);
-            break;
-        case 2:
-            cout << "Enter amount to withdraw: ";
-            cin >> amount;
-            accounts[accountNumber]->withdraw(amount);
-            break;
-        default:
-            cout << "Invalid choice." << endl;
+    void display_all_accounts() {
+        for (std::vector<BankAccount*>::iterator it = accounts.begin(); it != accounts.end(); ++it) {
+            (*it)->displayAccountInfo();
+        }
     }
-}
+
+    void perform() {
+        int accountNumber;
+        std::cout << "Enter account number: ";
+        std::cin >> accountNumber;
+
+        if (accountNumber < 0 || static_cast<size_t>(accountNumber) >= accounts.size()) {
+            std::cout << "Invalid account number!" << std::endl;
+            return;
+        }
+
+        int choice;
+        std::cout << "1. Deposit\n2. Withdraw\nEnter choice: ";
+        std::cin >> choice;
+
+        double amount;
+        switch (choice) {
+            case 1:
+                std::cout << "Enter amount to deposit: ";
+                std::cin >> amount;
+                accounts[accountNumber]->deposit(amount);
+                break;
+            case 2:
+                std::cout << "Enter amount to withdraw: ";
+                std::cin >> amount;
+                accounts[accountNumber]->withdraw(amount);
+                break;
+            default:
+                std::cout << "Invalid choice!" << std::endl;
+        }
+    }
+
+    ~Bank() {
+        for (std::vector<BankAccount*>::iterator it = accounts.begin(); it != accounts.end(); ++it) {
+            delete *it;
+        }
+        accounts.clear();
+    }
+};

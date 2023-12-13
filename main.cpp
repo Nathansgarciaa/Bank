@@ -1,59 +1,39 @@
 #include "BankAccount.h"
 #include <iostream>
 #include <string>
-#include "BankAccount.h"
+#include "Bank.cpp"
 
 using namespace std;
 
 int main() {
-    string holderName;
-    double initialBalance;
-    int option;
-
-    cout << "Enter account holder's name: ";
-    getline(cin, holderName);
-    cout << "Enter initial account balance: ";
-    cin >> initialBalance;
-
-    BankAccount account(holderName, initialBalance); // Added a semicolon here
+    Bank bank;
+    int choice;
 
     do {
-        cout << "\nMenu:\n"
-             << "1. Display account information\n"
-             << "2. Deposit funds\n"
-             << "3. Withdraw funds\n"
-             << "4. Exit\n"
-             << "Select an option: ";
-        cin >> option;
+        std::cout << "1. Add a new account\n";
+        std::cout << "2. Display all accounts\n";
+        std::cout << "3. Perform operations on accounts\n";
+        std::cout << "4. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
 
-        try {
-            if (option == 1) {
-                account.displayAccountInfo();
-            } else if (option == 2) {
-                double depositAmount;
-                cout << "Enter deposit amount: ";
-                cin >> depositAmount;
-                account.deposit(depositAmount);
-                cout << "Deposited successfully.\n";
-            } else if (option == 3) {
-                double withdrawalAmount;
-                cout << "Enter withdrawal amount: ";
-                cin >> withdrawalAmount;
-                account.withdraw(withdrawalAmount);
-                cout << "Withdrawn successfully.\n";
-            } else if (option == 4) {
-                cout << "Exiting.\n";
-            } else {
-                cout << "Invalid option. Please try again.\n";
-            }
-        } catch (const invalid_argument &e) {
-            cerr << "Error: " << e.what() << endl;
+        switch (choice) {
+            case 1:
+                bank.add_account();
+                break;
+            case 2:
+                bank.display_all_accounts();
+                break;
+            case 3:
+                bank.perform();
+                break;
+            case 4:
+                std::cout << "Exiting..." << std::endl;
+                break;
+            default:
+                std::cout << "Invalid choice!" << std::endl;
         }
-
-        // Clear the input buffer to handle next input correctly
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    } while (option != 4);
+    } while (choice != 4);
 
     return 0;
 }

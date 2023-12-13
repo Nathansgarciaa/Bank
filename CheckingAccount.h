@@ -9,7 +9,7 @@ private:
 
 public:
     // Constructor
-    CheckingAccount(string accountHolderName, double accountBalance, double overdraftFee);
+    CheckingAccount(string accountHolderName, double accountBalance);
 
     // Overridden withdraw function
     void withdraw(double amount);
